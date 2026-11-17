@@ -1,0 +1,17 @@
+# ---- 绝对不能上传的个人文件 ----
+# 你的 API Key
+deepseek.key
+*.key
+# 你的搜索记录
+usage.log
+# 含你电脑上的路径
+claude_config_path.txt
+
+# ---- 安装时生成的文件 ----
+.venv/
+__pycache__/
+*.pyc
+
+# ---- 系统文件 ----
+.DS_Store
+Thumbs.db

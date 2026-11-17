@@ -1,0 +1,26 @@
+# 每次推送代码或提交 Pull Request 时，GitHub 会在三种系统上自动跑一遍测试
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.11", "3.13"]
+    runs-on: ${{ matrix.os }}
+    env:
+      PYTHONUTF8: "1"   # 让 Windows 上的输出也用 UTF-8，避免中文报错
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: 安装依赖（核对哈希）
+        run: python -m pip install --require-hashes --only-binary=:all: -r requirements.txt
+      - name: 运行测试（使用本机模拟服务器，不访问真实 DeepSeek）
+        run: python tests/test_server.py server.py

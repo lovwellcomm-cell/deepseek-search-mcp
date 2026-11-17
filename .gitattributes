@@ -1,0 +1,4 @@
+# 统一换行符：.bat 必须是 Windows 换行（CRLF），.sh 必须是 Unix 换行（LF），否则脚本会运行出错
+* text=auto
+*.bat text eol=crlf
+*.sh text eol=lf
